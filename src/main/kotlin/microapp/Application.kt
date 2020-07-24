@@ -1,0 +1,11 @@
+package microapp
+
+import io.micronaut.runtime.Micronaut.*
+
+fun main(args: Array<String>) {
+	build()
+	    .args(*args)
+		.packages("microapp")
+		.start()
+}
+
