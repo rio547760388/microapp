@@ -24,7 +24,7 @@ dependencies {
     kapt("io.micronaut:micronaut-inject-java")
     kapt("io.micronaut:micronaut-validation")
     kapt("io.micronaut.data:micronaut-data-processor")
-    kapt("io.micronaut.spring:micronaut-spring-annotation")
+    /*kapt("io.micronaut.spring:micronaut-spring-annotation")*/
     implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     implementation("io.micronaut:micronaut-inject")
     implementation("io.micronaut:micronaut-validation")
@@ -39,10 +39,10 @@ dependencies {
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.micronaut.rxjava3:micronaut-rxjava3")
     implementation("io.micronaut.rabbitmq:micronaut-rabbitmq")
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("io.micronaut.data:micronaut-data-spring")
-    implementation("io.micronaut.data:micronaut-data-spring-jpa")
-    implementation("org.springframework:spring-orm")
+    /*implementation("org.springframework.boot:spring-boot-starter")*/
+    /*implementation("io.micronaut.data:micronaut-data-spring")
+    implementation("io.micronaut.data:micronaut-data-spring-jpa")*/
+    /*implementation("org.springframework:spring-orm")*/
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("org.postgresql:postgresql")
@@ -56,14 +56,14 @@ dependencies {
     testRuntimeOnly("org.testcontainers:postgresql")
 }
 
-test.classpath += configurations.developmentOnly
+//test.classpath += configurations.developmentOnly
 
 mainClassName = "microapp.ApplicationKt"
 
 // use JUnit 5 platform
-test {
+/*test {
     useJUnitPlatform()
-}
+}*/
 
 java {
     sourceCompatibility = JavaVersion.toVersion('1.8')

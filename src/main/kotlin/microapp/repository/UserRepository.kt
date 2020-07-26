@@ -1,10 +1,10 @@
 package microapp.repository
 
+import io.micronaut.context.annotation.Parameter
 import io.micronaut.data.annotation.Query
+import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jpa.repository.JpaRepository
 import microapp.entity.Users
-import org.springframework.data.repository.query.Param
-import org.springframework.stereotype.Repository
 
 /**
  * @author Mloong
@@ -18,5 +18,5 @@ interface UsersRepository: JpaRepository<Users, Long> {
         select u from Users u
         where u.name = :name
     """)
-    fun findByName(@Param("name") name: String): Users?
+    fun findByName(@Parameter("name") name: String): Users?
 }

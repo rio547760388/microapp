@@ -4,7 +4,10 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.QueryValue
+import microapp.common.Result
+import microapp.entity.Account
 import microapp.entity.Users
+import microapp.repository.AccountRepository
 import microapp.repository.UsersRepository
 import javax.inject.Inject
 
@@ -18,6 +21,9 @@ import javax.inject.Inject
 class IndexEndpoint {
     @Inject
     lateinit var userRepository: UsersRepository
+
+    @Inject
+    lateinit var accountRepository: AccountRepository
 
     @Get(uri = "/")
     fun index(id: Long): Users? {
@@ -33,6 +39,12 @@ class IndexEndpoint {
     fun addUser(user: Users): Users {
         userRepository.save(user)
         return user
+    }
+
+    @Post("/account")
+    fun addAccount(account: Account): Result<Account> {
+        accountRepository.save(account)
+        return Result(0, account)
     }
 
 }

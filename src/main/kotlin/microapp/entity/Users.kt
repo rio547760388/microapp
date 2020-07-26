@@ -15,7 +15,7 @@ import javax.persistence.Table
 @Table(name = "users")
 data class Users constructor(
         @Id var id: Long? = null,
-        @Column(name= "name") var name: String? = null,
+        @Column(name= "name", columnDefinition = "varchar(100)") var name: String? = null,
         @Column(name= "address") var address: String? = null,
         @Column(name = "age") var age: Int? = null
 )
