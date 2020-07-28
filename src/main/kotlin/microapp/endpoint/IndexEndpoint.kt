@@ -1,13 +1,12 @@
 package microapp.endpoint
 
+import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.QueryValue
 import microapp.common.Result
-import microapp.entity.Account
 import microapp.entity.Users
-import microapp.repository.AccountRepository
 import microapp.repository.UsersRepository
 import javax.inject.Inject
 
@@ -17,34 +16,33 @@ import javax.inject.Inject
  * @version 0.0.1
  * <p></p>
  **/
-@Controller
+@Controller(
+        value = "/",
+        produces = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XHTML, MediaType.APPLICATION_XML]
+)
 class IndexEndpoint {
     @Inject
     lateinit var userRepository: UsersRepository
 
-    @Inject
-    lateinit var accountRepository: AccountRepository
-
-    @Get(uri = "/")
-    fun index(id: Long): Users? {
-        return userRepository.findById(id).orElse(null)
+    @Get
+    fun index(): Result<String> {
+        return Result.ok("Index page")
     }
 
-    @Get(uri = "/{name}")
-    fun userByName(@QueryValue("name") name: String): Users? {
-        return userRepository.findByName(name)
+    @Get(uri = "{name}")
+    fun userByName(@QueryValue("name") name: String): Result<Users?> {
+        return Result.ok(userRepository.findByName(name))
     }
 
-    @Post(uri = "/")
-    fun addUser(user: Users): Users {
-        userRepository.save(user)
-        return user
+    @Post
+    fun addUser(user: Users): Result<Users> {
+        return Result.ok(userRepository.save(user))
     }
 
-    @Post("/account")
-    fun addAccount(account: Account): Result<Account> {
-        accountRepository.save(account)
-        return Result(0, account)
+    @Get("xml")
+    fun xmltest(): Map<String, Int> {
+        return mapOf(Pair("a",1),
+                Pair("b",2)
+        )
     }
-
 }

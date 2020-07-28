@@ -1,9 +1,7 @@
 package microapp.entity
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import java.time.LocalDateTime
+import javax.persistence.*
 
 /**
  * @author Mloong
@@ -15,7 +13,11 @@ import javax.persistence.Table
 @Table(name = "users")
 data class Users constructor(
         @Id var id: Long? = null,
-        @Column(name= "name", columnDefinition = "varchar(100)") var name: String? = null,
-        @Column(name= "address") var address: String? = null,
-        @Column(name = "age") var age: Int? = null
+        @Column(name = "user_name", columnDefinition = "varchar(100)") var username: String? = null,
+        @Column(name = "password") var password: String? = null,
+        @Column(name = "enabled") var enabled: Int? = null,
+        @Column(name = "create_time") var createTime: LocalDateTime? = null,
+        @Column(name = "update_time") var updateTime: LocalDateTime? = null,
+        @Column(name = "last_login") var lastLogin: LocalDateTime? = null,
+        @OneToMany @JoinColumn(name = "user_id", referencedColumnName = "id") var userRoles: List<UserRole>
 )
